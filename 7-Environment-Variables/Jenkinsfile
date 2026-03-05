@@ -1,14 +1,12 @@
 pipeline {
-    agent any
+    agent { label "worker-nod"}
 
     stages {
-        stage('Hello') {
+        stage('Docker cred and val') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DockerPass', usernameVariable: 'DockerUser')]) {
+                withCredentials([usernamePassword(credentialsId: 'akifmhd', passwordVariable: 'password', usernameVariable: 'username')]){
                     echo "Hello World"
-                    echo "Docker username: ${DockerUser}"
-                    // You can use the credentials here, for example:
-                    // sh "docker login -u ${DockerUser} -p ${DockerPass}"
+                    echo "Docker username: ${username}"
                 }
             }
         }
